@@ -53,5 +53,6 @@ Nosso projeto será desenvolvido nas seguintes linguagens:
 |---|---|
 |HTML|estrutura do site|
 |CSS|estilização do site|
+|JavaScript|deixar o site mais dinâmico|
 |python + flask| integração com banco de dados|
 
