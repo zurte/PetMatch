@@ -1,9 +1,34 @@
 <!DOCTYPE html>
-<html lang="pt-br"> <head> <meta charset="UTF-8">
-    <title>Meu primeiro site Python</title> 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    </head> <body> <h1>Meu primeiro site com Python!</h1> 
-        <p>Estou aprendendo desenvolvimento web.</p> 
-        <p>Este site utiliza Python e Flask.</p> 
+<html lang="pt-br"> 
+    <head> 
+        <meta charset="UTF-8">
+        <title>PetMatch</title> 
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    </head> 
+    <body>
+        <div>
+            <nav class="navbar" id="navbar-index">
+                <h1>PetMatch</h1>
+                <ul>
+                    <li><button><a href="/adocao">Adoção</a></button></li>
+                    <li><button><a href="/doacao">doação</a></button></li>
+                    <li><button><a href="/formulario">Login</a></button></li>
+                    <li><button><a href="/criar_pagina">Login</a></button></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="conteiner">
+            <div class="conteiner-img">
+                <img src="" alt="">
+                <img src="" alt="">
+                <img src="" alt="">
+                <img src="" alt="">
+                <img src="" alt="">
+                <img src="" alt="">
+                <img src="" alt="">
+                <img src="" alt="">
+            </div>
+            <button><a href="/blog">blog</a></button>
+        </div>
     </body> 
 </html>

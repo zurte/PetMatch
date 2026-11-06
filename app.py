@@ -1,25 +1,67 @@
-from flask import Flask, render_template
-
-import sqlite3
-
-
-
-conexao = sqlite3.connect('meu_banco.db')
-
-ponteiro = sqlite3.Cursor(conexao)
-
-ponteiro.execute("""CREATE TABLE IF NOT EXISTS animais(
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            nome TEXT
-)""")
+from flask import Flask, render_template,send_file
+import os
 
 
 
 app = Flask(__name__)
 
+def gerar_arquivo(dados_animal):
+     with app.app_context():
+          pagina_html = render_template("base.html",animal=dados_animal)
+
+          pasta_destino = 'templates'
+
+          nome_arquivo = f"Pet - {dados_animal['id']}.html"
+
+          caminho = os.path.join(pasta_destino,nome_arquivo)
+
+          with open(caminho,'w',encoding='utf-8',) as f:
+               f.write(pagina_html)
+               print(f"Pagina {dados_animal['id']} gerada com sucesso")
+
+          return caminho
+
+          
+
+@app.route('/criar_pagina')
+
+def criar_pagina():
+     animal_exemplo = {
+          'id': 110,
+          'image':'static/img/cachorro.jpeg',
+          'nome': "Jeff",
+          'descricao':'Esse é um cachoro com certeza'
+     }
+
+     caminho = gerar_arquivo(animal_exemplo)
+
+     return send_file(caminho)
+
 @app.route("/")
 
 def inicio():
-     return render_template("index.html") 
+     return render_template("index.html")
+
+@app.route("/adocao")
+
+def adocao():
+     return render_template("adocao.html")
+
+@app.route("/doacao")
+
+def doacao():
+     return render_template("doacao.html")
+
+@app.route("/formulario")
+
+def formulario():
+     return render_template("formulario.html")
+
+@app.route("/blog")
+
+def blog():
+     return render_template("blog.html")
 
 if __name__ == "__main__": app.run(debug=True)
+
+
