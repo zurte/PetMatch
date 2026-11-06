@@ -1,4 +1,4 @@
-from flask import Flask, render_template,send_file
+from flask import Flask, render_template,send_file,request
 import os
 
 
@@ -40,7 +40,17 @@ def criar_pagina():
 @app.route("/")
 
 def inicio():
-     return render_template("index.html")
+     return render_template("formulario.html")
+
+@app.route('/enviar-dados', methods=['GET', 'POST'])
+def index():
+    if request.method == 'POST':
+        nome = request.form['nome']
+        email = request.form['email']
+
+        return f"Olá, {nome}! Seu email é {email}."
+
+    return render_template('index.html')
 
 @app.route("/adocao")
 
@@ -51,11 +61,6 @@ def adocao():
 
 def doacao():
      return render_template("doacao.html")
-
-@app.route("/formulario")
-
-def formulario():
-     return render_template("formulario.html")
 
 @app.route("/blog")
 
