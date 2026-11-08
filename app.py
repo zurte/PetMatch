@@ -45,10 +45,9 @@ def inicio():
 @app.route('/enviar-dados', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
+        #aqui eu colocarei as funções que vão registrar o usuário dentro do bancod e dados
         nome = request.form['nome']
         email = request.form['email']
-
-        return f"Olá, {nome}! Seu email é {email}."
 
     return render_template('index.html')
 
