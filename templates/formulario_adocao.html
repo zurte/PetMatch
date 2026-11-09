@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <title>Formulário com Flask</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        
+    </head>
+    <body>
+        <h1>Cadastro de animal para adoção</h1>
+        <!-- O método POST envia os dados de forma segura ao servidor -->
+        <form action="/index" method="POST">
+            <!-- Nome -->
+            <label for="nome">Nome:</label><br>
+            <input type="text" id="nome" name="nome" value="N/a"><br><br>
+            <!-- Tipo -->
+            <label for="tipo">Tipo:</label><br>
+            <input type="text" id="tipo" name="tipo" required><br><br>
+            <!-- Raça -->
+            <label for="raça">Raça:</label><br>
+            <input type="text" id="raça" name="raça" required><br><br>
+            <!-- Idade -->
+            <label for="idade">Idade:</label><br>
+            <input type="number" id="idade" name="idade" required><br><br>
+            <!-- Sexo -->
+            <label for="sexo">Sexo:</label><br>
+            <input type="text" id="sexo" name="sexo" required><br><br>
+            <!-- Porte -->
+            <label for="porte">Porte:</label><br>
+            <input type="text" id="porte" name="porte" required><br><br>
+            <!-- Status de vacinação -->
+            <input type="checkbox" id="vacinas" name="vacinas" value="vacinas" required>
+            <label for="vacinas">Carteira de vacina em dia?:</label><br><br>
+            <!-- Data de Nascimento -->
+            <label for="data-de-nascimento">Data de Nascimento</label><br><br>
+            <input type="date" id="data-de-nascimento" name="data-de-nascimento" required><br><br>
+            <!-- Descrição -->
+            <label for="descricao">Descrição:</label><br>
+            <textarea type="text" id="descricao" name="descricao" rows="4" cols="50" required></textarea><br><br>
+            <!-- Foto -->
+            <label for="imagem">Coloque uma imagem do Pet</label>
+            <input type="file" id="imagem" name="imagem" required><br><br>
+
+            <button type="submit">Enviar Dados</button>
+        </form>
+
+        <script src="{{ url_for('static', filename='script/script.js') }}" ></script>
+    </body>
+</html>

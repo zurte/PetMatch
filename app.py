@@ -1,6 +1,8 @@
 from flask import Flask, render_template,send_file,request
 import os
 
+caminho_script = os.path.abspath("static/script/script.js")
+
 
 
 app = Flask(__name__)
@@ -40,29 +42,34 @@ def criar_pagina():
 @app.route("/")
 
 def inicio():
-     return render_template("formulario.html")
+     return render_template("formulario_login.html")
 
-@app.route('/enviar-dados', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
         #aqui eu colocarei as funções que vão registrar o usuário dentro do bancod e dados
-        nome = request.form['nome']
         email = request.form['email']
+        senha = request.form['senha']
 
     return render_template('index.html')
 
-@app.route("/adocao")
+@app.route("/registrar")
+def registrar_usuario():
+     return render_template("formulario_registro.html")
 
+@app.route("/registrar_animal")
+def registrar_animal():
+     return render_template("formulario_adocao.html")
+
+@app.route("/adocao")
 def adocao():
      return render_template("adocao.html")
 
 @app.route("/doacao")
-
 def doacao():
      return render_template("doacao.html")
 
 @app.route("/blog")
-
 def blog():
      return render_template("blog.html")
 

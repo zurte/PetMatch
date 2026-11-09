@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <title>PetMatch</title> 
         <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        
     </head> 
     <body>
         <div>
@@ -12,8 +13,7 @@
                 <ul>
                     <li><button><a href="/adocao">Adoção</a></button></li>
                     <li><button><a href="/doacao">doação</a></button></li>
-                    <li><button><a href="/formulario">Login</a></button></li>
-                    <li><button><a href="/criar_pagina">Login</a></button></li>
+                    <li><button id="registrar_animal">Registre um animal</button></li>
                 </ul>
             </nav>
         </div>
@@ -30,5 +30,6 @@
             </div>
             <button><a href="/blog">blog</a></button>
         </div>
+        <script src="{{ url_for('static', filename='script/script.js') }}" ></script>
     </body> 
 </html>
