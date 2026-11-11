@@ -27,6 +27,8 @@ footer, header, h4, menu, nav, section {
 }
 body {
     line-height: 1;
+    cursor: url(cursor.png) auto;
+    background-image: url(animais.png);
 }
 ol, ul {
     list-style: none;
@@ -43,5 +45,33 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
-/*--------------------------------------SEU CÓDIGO COMEÇA AQUI----------------------------------------
-                                            Seja Feliz :)                                             */
+/*Form*/
+form {
+    border-radius: 25 px;
+    background-color: white;
+    padding: 20 px
+}
+label{display:block}
+
+input[type=text], select {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
+  font-style:  ;
+}
+
+input[type=email], select{
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+
+}
