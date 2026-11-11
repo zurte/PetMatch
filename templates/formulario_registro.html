@@ -8,7 +8,7 @@
     <body>
         <h1>Cadastro de Usuário</h1>
         <!-- O método POST envia os dados de forma segura ao servidor -->
-        <form action="/index" method="POST">
+        <form id="formulario_usuario" method="POST">
             <label for="nome">Nome:</label><br>
             <input type="text" id="nome" name="nome"  required><br><br>
 
@@ -30,7 +30,7 @@
             <label for="cep">Insirá seu cep</label>
             <input type="text" id="cep" name="cep" autocomplete="postal-code" required><br><br>
 
-            <button type="submit">Enviar Dados</button>
+            <button id="adicionar_usuario">Enviar Dados</button>
         </form>
 
     

@@ -1,11 +1,15 @@
 from flask import Flask, render_template,send_file,request
+import bd
 import os
+
 
 caminho_script = os.path.abspath("static/script/script.js")
 
 
 
+
 app = Flask(__name__)
+
 
 def gerar_arquivo(dados_animal):
      with app.app_context():
@@ -26,7 +30,6 @@ def gerar_arquivo(dados_animal):
           
 
 @app.route('/criar_pagina')
-
 def criar_pagina():
      animal_exemplo = {
           'id': 110,
@@ -72,6 +75,13 @@ def doacao():
 @app.route("/blog")
 def blog():
      return render_template("blog.html")
+
+@app.route("/adicionar_usuario",methods=["GET,POST"])
+def adicionar_usuario(novo_usuario):
+
+     bd.add_usuario(novo_usuario)
+
+
 
 if __name__ == "__main__": app.run(debug=True)
 
