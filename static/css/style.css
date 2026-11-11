@@ -27,8 +27,11 @@ footer, header, h4, menu, nav, section {
 }
 body {
     line-height: 1;
-    cursor: url(cursor.png) auto;
-    background-image: url(animais.png);
+    cursor: url("../img/cursor.png") auto;
+    background-image: url("../img/animais.jpg");
+    background-size: cover;
+    background-position: center;
+
 }
 ol, ul {
     list-style: none;
@@ -46,32 +49,10 @@ table {
     border-spacing: 0;
 }
 /*Form*/
-form {
-    border-radius: 25 px;
+#formulario_usuario {
     background-color: white;
-    padding: 20 px
-}
-label{display:block}
-
-input[type=text], select {
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
-  font-style:  ;
-}
-
-input[type=email], select{
-    width: 100%;
-    padding: 12px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-
+    width: 450px;
+    margin: 100px auto;
+    border-radius: 25px;
+    padding: 20px
 }
