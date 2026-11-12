@@ -56,7 +56,7 @@ def index():
 
     return render_template('index.html')
 
-@app.route("/registrar")
+@app.route("/registrar", methods=["GET","POST"])
 def registrar_usuario():
      return render_template("formulario_registro.html")
 
@@ -76,10 +76,22 @@ def doacao():
 def blog():
      return render_template("blog.html")
 
-@app.route("/adicionar_usuario",methods=["GET,POST"])
-def adicionar_usuario(novo_usuario):
+@app.route("/adicionar_usuario",methods=["POST"])
+def adicionar_usuario():
+
+     novo_usuario = {
+          "nome" : request.form["nome"],
+          "email" : request.form["email"],
+          "senha" : request.form["senha"],
+          "telefone": request.form["telefone"],
+          "cpf" : request.form["cpf"],
+          "idade" : request.form["idade"],
+          "cep" : request.form["cep"]
+     }
 
      bd.add_usuario(novo_usuario)
+
+     return render_template('index.html')
 
 
 

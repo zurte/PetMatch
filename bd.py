@@ -1,16 +1,17 @@
 import sqlite3
+from werkzeug.security import generate_password_hash as senha_hash
 import os 
 
 
 
-conn = sqlite3.connect("DataBase.db")
-cursor = conn.cursor()
 
 caminho_db = os.path.exists("./DataBase.db")
 
 def criar_tabela_usuario():
 
-    
+    conexao = sqlite3.connect("DataBase.db")
+    cursor = conexao.cursor()
+
     cursor.execute("""
         create table if not exists usuario(
         id integer primary key autoincrement,
@@ -18,16 +19,31 @@ def criar_tabela_usuario():
         cpf text,
         email text,
         cep text,
-        numero text
+        numero text,
+        senha text
         )
         """)
+    conexao.commit()
+    conexao.close()
+
+    
     
 def add_usuario(usuario):
     """usuario"""
 
-    dados = (usuario["nome"], usuario["cpf"],usuario["email"],usuario["cep"],usuario["numero"]),
+    print("ok")
 
-    cursor.execute("insert into usuario (nome, cpf, email, cep, numero) values(?,?,?,?,?)",dados)
+    conexao = sqlite3.connect("DataBase.db")
+    cursor = conexao.cursor()
 
-if caminho_db:
-    criar_tabela_usuario()
+    dados = (usuario["nome"], usuario["cpf"],usuario["email"],usuario["cep"],usuario["telefone"], senha_hash(usuario["senha"]))
+
+    cursor.execute("insert into usuario (nome, cpf, email, cep, numero, senha) values(?,?,?,?,?,?)",dados)
+
+    conexao.commit()
+    conexao.close()
+
+
+
+
+criar_tabela_usuario()
