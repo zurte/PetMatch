@@ -1,5 +1,6 @@
 import sqlite3
 from werkzeug.security import generate_password_hash as senha_hash
+from werkzeug.security import check_password_hash as senha_check
 import os 
 
 
