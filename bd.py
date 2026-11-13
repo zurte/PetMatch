@@ -57,13 +57,20 @@ def checar_usuario(email,senha):
             """,(email,))
 
     senha_digitada = cursor.fetchone()
+   
 
     conexao.close()
 
     if senha == None:
         return False
 
-    if not senha_check(senha,senha_digitada):
+    senha_digitada = senha_digitada[0]
+
+    print(senha)
+    print(senha_digitada)
+    print(senha_check(senha,senha_digitada))
+
+    if not senha_check(senha_digitada,senha):
         return False
 
     return True
