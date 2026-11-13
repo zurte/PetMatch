@@ -25,8 +25,14 @@ article, aside, details, figcaption, figure,
 footer, header, h4, menu, nav, section {
     display: block;
 }
+<<<<<<< HEAD
 .body {
     width: 100vw;
+=======
+
+body{
+    width: 100vh;
+>>>>>>> 0517679 (tst)
     min-height: 100vh;
     line-height: 1;
     cursor: url("../img/cursor.png") auto;
