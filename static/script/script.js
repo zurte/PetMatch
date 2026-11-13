@@ -1,14 +1,15 @@
 const botaoRedirecionar = document.getElementById("redirecionar");
+const botaoRegistrarAnimal = document.getElementById("registrar_animal");
 
 if (botaoRedirecionar) {
 document.getElementById("redirecionar").addEventListener("click", function() {
     window.location.href = "/registrar";
 } );}
 
-
+if (botaoRegistrarAnimal) {
 document.getElementById("registrar_animal").addEventListener("click", function() {
     window.location.href = "/registrar_animal";
-});
+});}
 
 if (window.location.pathname === "/formulario_registro") {
     document.getElementById("formulario_usuario").addEventListener("click", function() {
