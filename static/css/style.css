@@ -25,7 +25,9 @@ article, aside, details, figcaption, figure,
 footer, header, h4, menu, nav, section {
     display: block;
 }
-body {
+.body {
+    width: 100%;
+    min-height: 100vh;
     line-height: 1;
     cursor: url("../img/cursor.png") auto;
     background-image: url("../img/animais.jpg");
