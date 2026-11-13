@@ -54,7 +54,10 @@ def index():
         email = request.form['email']
         senha = request.form['senha']
 
-    return render_template('index.html')
+        if bd.checar_usuario(email,senha):
+          return render_template('index.html')
+        else:
+          return render_template('formulario_login.html',senha_incorreta="senha incorreta")
 
 @app.route("/registrar", methods=["GET","POST"])
 def registrar_usuario():

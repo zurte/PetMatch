@@ -14,7 +14,7 @@ def criar_tabela_usuario():
     cursor = conexao.cursor()
 
     cursor.execute("""
-        create table if not exists usuario(
+        create table if not exists tutores(
         id integer primary key autoincrement,
         nome text,
         cpf text,
@@ -39,12 +39,33 @@ def add_usuario(usuario):
 
     dados = (usuario["nome"], usuario["cpf"],usuario["email"],usuario["cep"],usuario["telefone"], senha_hash(usuario["senha"]))
 
-    cursor.execute("insert into usuario (nome, cpf, email, cep, numero, senha) values(?,?,?,?,?,?)",dados)
+    cursor.execute("insert into tutores (nome, cpf, email, cep, numero, senha) values(?,?,?,?,?,?)",dados)
 
     conexao.commit()
     conexao.close()
 
 
+def checar_usuario(email,senha):
 
+    conexao = sqlite3.connect("DataBase.db")
+    cursor = conexao.cursor()
+
+    cursor.execute("""
+            SELECT senha 
+            FROM tutores
+            WHERE email = ?;
+            """,(email,))
+
+    senha_digitada = cursor.fetchone()
+
+    conexao.close()
+
+    if senha == None:
+        return False
+
+    if not senha_check(senha,senha_digitada):
+        return False
+
+    return True
 
 criar_tabela_usuario()

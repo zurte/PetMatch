@@ -7,7 +7,7 @@
         
     </head>
     <body>
-        <h1>Cadastro de Usuário</h1>
+        <h1>Login de Usuário</h1>
         <!-- O método POST envia os dados de forma segura ao servidor -->
         <form action="/index" method="POST">
 
@@ -16,6 +16,10 @@
 
             <label for="senha">Senha:</label><br>
             <input type="password" id="senha" name="senha" required><br><br>
+            <small> {% if senha_incorreta %}
+                        {{senha_incorreta}}
+                    {% endif %}        
+            </small><br>
 
             <button type="submit">Enviar Dados</button>
         </form>
