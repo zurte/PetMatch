@@ -25,21 +25,18 @@ article, aside, details, figcaption, figure,
 footer, header, h4, menu, nav, section {
     display: block;
 }
-<<<<<<< HEAD
-.body {
-    width: 100vw;
-=======
 
 body{
-    width: 100vh;
->>>>>>> 0517679 (tst)
+    width: 100vw;
     min-height: 100vh;
     line-height: 1;
-    cursor: url("../img/cursor.png") auto;
+    cursor: url("../img/pata_direita.png"), auto;
     background-image: url("../img/animais.jpg");
     background-size: cover;
     background-position: center;
-
+}
+input, textarea, select {
+    cursor: url("../img/pata_esquerda.png") 12 12, text;
 }
 ol, ul {
     list-style: none;
@@ -63,4 +60,25 @@ table {
     margin: 100px auto;
     border-radius: 25px;
     padding: 20px
+}
+
+
+
+
+
+/*login*/
+form {
+    background-color: white;
+    width: 250px ;
+    margin: 50px auto;
+    border-radius: 15px ;
+    padding: 10px
+}
+label[for="redirecionar"]{
+    box-align: center;
+}
+#redirecionar{
+    display: flex;
+    justify-content: center;
+    align-items: center ;
 }
