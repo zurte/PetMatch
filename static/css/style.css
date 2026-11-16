@@ -61,11 +61,6 @@ table {
     border-radius: 25px;
     padding: 20px
 }
-
-
-
-
-
 /*login*/
 form {
     background-color: white;
@@ -75,10 +70,20 @@ form {
     padding: 10px
 }
 label[for="redirecionar"]{
-    box-align: center;
+    display:block ;
+    text-align: center;
 }
-#redirecionar{
+button#redirecionar{
+    display: block ;
+    margin: 0 auto;
+}
+/*Index*/
+.navbar ul{
     display: flex;
-    justify-content: center;
-    align-items: center ;
+    flex-direction: row;
+    gap: 705px;
+}
+navbar li[adocao]{
+    height: 250px;
+    width: 250px;
 }
