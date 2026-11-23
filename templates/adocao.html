@@ -14,6 +14,21 @@
                     <li><button><a href="/doacao">doação</a></button></li>
                 </ul>
             </nav>
+            <div>
+                {%if animais%}
+                <h2>Pets para adoção</h2>
+                    {% for animal in animais %}
+                    <div id="{{animal[0]}} " name="{{animal[0]}}" class="card-animal">
+                        <h2>{{animal[0]}}</h2>
+                        <img src="{{animal[1]}}" alt="imagem do animal">
+                        <p>idade: {{animal[2]}} {{animal[3]}}</p>
+                        <p>raca: {{animal[4]}}</p>
+                        <p>sexo: {{animal[5]}}</p>
+                        <p>cor: {{animal[6]}}</p><br><br>
+                    </div>
+                    {%endfor%}
+                {%endif%}
+            </div>
         </div>
     </body> 
 </html>

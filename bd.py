@@ -108,7 +108,26 @@ def add_animal(animal):
     animal["imagem"]
     )
 
-    cursor.execute("""INSERT INTO animais (nome,idade,idade_unidade,raca_id,sexo_id,cor_id,castrado,idade_unidade,peso_valor,peso_unidade,vacinacao_medicacao,status_adocao,image)""")
+    cursor.execute("""
+        INSERT INTO animais (
+            nome,
+            idade,
+            idade_unidade,
+            raca_id,
+            sexo_id,
+            cor_id,
+            peso_valor,
+            peso_unidade,
+            castrado,
+            vacinacao_medicacao,
+            status_adocao,
+            image
+        )
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """, dados)
+
+    conexao.commit()
+    conexao.close()
 
 def checar_usuario(email,senha):
 
@@ -148,7 +167,9 @@ def listar_animais():
 
                     SELECT  
                     animais.nome,
+                    animais.image,
                     animais.idade,
+                    animais.idade_unidade,
                     racas.raca,
                     sexos.descricao,
                     cores.nome_cor
@@ -169,6 +190,8 @@ def listar_animais():
     conexao.close()
 
     return animais
+
+
 criar_tabela_usuario()
 criar_tabela_animais()
 

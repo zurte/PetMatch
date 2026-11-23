@@ -27,8 +27,6 @@ def gerar_arquivo(dados_animal):
 
           return caminho
 
-          
-
 @app.route('/criar_pagina')
 def criar_pagina():
      animal_exemplo = {
@@ -43,7 +41,6 @@ def criar_pagina():
      return send_file(caminho)
 
 @app.route("/")
-
 def inicio():
      return render_template("formulario_login.html")
 
@@ -70,7 +67,7 @@ def registrar_animal():
 @app.route("/adocao")
 def adocao():
      animais = bd.listar_animais()
-     return render_template("adocao.html", animais)
+     return render_template("adocao.html", animais = animais)
 
 @app.route("/doacao")
 def doacao():
@@ -97,8 +94,12 @@ def adicionar_usuario():
 
      return render_template('index.html')
 
-@app.route("/adicionar_animal")
+@app.route("/adicionar_animal",methods=["POST"])
 def adcionar_animal():
+
+     nova_imagem = request.files["imagem"]
+
+     nova_imagem.save(os.path.join("static/img",nova_imagem.filename))
 
      novo_animal = {
           "nome": request.form["nome"],
@@ -112,8 +113,12 @@ def adcionar_animal():
           "castrado": request.form.get("castrado", "0"),
           "vacinacao_medicacao": request.form["vacinacao_medicacao"],
           "status_adocao": request.form["status_adocao"],
-          "imagem": request.files.get("imagem")
+          "imagem": "static/img/" + nova_imagem.filename
      }
+
+     bd.add_animal(novo_animal)
+
+     return render_template('formulario_adocao.html', mensagem_sucesso="Animal adicionado com sucesso!")
 
 
 
