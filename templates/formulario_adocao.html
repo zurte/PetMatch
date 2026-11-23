@@ -2,48 +2,115 @@
 <html lang="pt-BR">
     <head>
         <meta charset="UTF-8">
-        <title>Formulário com Flask</title>
+        <title>Cadastro de Animal</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-        
     </head>
+
     <body>
+
         <h1>Cadastro de animal para adoção</h1>
-        <!-- O método POST envia os dados de forma segura ao servidor -->
-        <form action="/index" method="POST">
+
+        <form action="/adicionar_animal" method="POST" enctype="multipart/form-data">
+
             <!-- Nome -->
             <label for="nome">Nome:</label><br>
-            <input type="text" id="nome" name="nome" value="N/a"><br><br>
-            <!-- Tipo -->
-            <label for="tipo">Tipo:</label><br>
-            <input type="text" id="tipo" name="tipo" required><br><br>
-            <!-- Raça -->
-            <label for="raça">Raça:</label><br>
-            <input type="text" id="raça" name="raça" required><br><br>
+            <input type="text" id="nome" name="nome" required><br><br>
+
+
             <!-- Idade -->
             <label for="idade">Idade:</label><br>
-            <input type="number" id="idade" name="idade" required><br><br>
-            <!-- Sexo -->
-            <label for="sexo">Sexo:</label><br>
-            <input type="text" id="sexo" name="sexo" required><br><br>
-            <!-- Porte -->
-            <label for="porte">Porte:</label><br>
-            <input type="text" id="porte" name="porte" required><br><br>
-            <!-- Status de vacinação -->
-            <input type="checkbox" id="vacinas" name="vacinas" value="vacinas" required>
-            <label for="vacinas">Carteira de vacina em dia?:</label><br><br>
-            <!-- Data de Nascimento -->
-            <label for="data-de-nascimento">Data de Nascimento</label><br><br>
-            <input type="date" id="data-de-nascimento" name="data-de-nascimento" required><br><br>
-            <!-- Descrição -->
-            <label for="descricao">Descrição:</label><br>
-            <textarea type="text" id="descricao" name="descricao" rows="4" cols="50" required></textarea><br><br>
-            <!-- Foto -->
-            <label for="imagem">Coloque uma imagem do Pet</label>
-            <input type="file" id="imagem" name="imagem" required><br><br>
+            <input type="number" id="idade" name="idade" min="0" required>
 
-            <button type="submit">Enviar Dados</button>
+            <select id="idade_unidade" name="idade_unidade">
+                <option value="meses">Meses</option>
+                <option value="anos">Anos</option>
+            </select><br><br>
+
+
+            <!-- Raça -->
+            <label for="raca_id">Raça:</label><br>
+
+            <select id="raca_id" name="raca_id" required>
+                <option value="">Selecione uma raça</option>
+                <option value="1">Africano</option>
+                <option value="2">Persa</option>
+                <option value="3">Sírio</option>
+                <option value="4">Jiboia</option>
+                <option value="5">Yorkshire</option>
+            </select><br><br>
+
+
+            <!-- Sexo -->
+            <label for="sexo_id">Sexo:</label><br>
+
+            <select id="sexo_id" name="sexo_id" required>
+                <option value="">Selecione o sexo</option>
+                <option value="1">Macho</option>
+                <option value="2">Fêmea</option>
+            </select><br><br>
+
+
+            <!-- Cor -->
+            <label for="cor_id">Cor:</label><br>
+
+            <select id="cor_id" name="cor_id" required>
+                <option value="">Selecione a cor</option>
+                <option value="1">Verde</option>
+                <option value="2">Branco</option>
+                <option value="3">Marrom</option>
+                <option value="4">Amarelo</option>
+                <option value="5">Preto</option>
+            </select><br><br>
+
+
+            <!-- Peso -->
+            <label for="peso_valor">Peso:</label><br>
+
+            <input type="number" id="peso_valor" name="peso_valor"
+                   step="0.01" min="0">
+
+            <select id="peso_unidade" name="peso_unidade">
+                <option value="g">Gramas</option>
+                <option value="kg">Quilogramas</option>
+            </select><br><br>
+
+
+            <!-- Castrado -->
+            <input type="checkbox" id="castrado" name="castrado" value="1">
+
+            <label for="castrado">Animal castrado?</label><br><br>
+
+
+            <!-- Vacinação e medicação -->
+            <label for="vacinacao_medicacao">Vacinação e medicação:</label><br>
+
+            <textarea id="vacinacao_medicacao"
+                      name="vacinacao_medicacao"
+                      rows="4" cols="50"></textarea><br><br>
+
+
+            <!-- Status de adoção -->
+            <label for="status_adocao">Status de adoção:</label><br>
+
+            <select id="status_adocao" name="status_adocao">
+                <option value="Disponível">Disponível</option>
+                <option value="Em processo de adoção">Em processo de adoção</option>
+                <option value="Adotado">Adotado</option>
+            </select><br><br>
+
+
+            <!-- Imagem -->
+            <label for="imagem">Fotografia do animal:</label><br>
+
+            <input type="file" id="imagem" name="imagem"
+                   accept="image/png, image/jpeg"><br><br>
+
+
+            <button type="submit">Cadastrar animal</button>
+
         </form>
 
-        <script src="{{ url_for('static', filename='script/script.js') }}" ></script>
+        <script src="{{ url_for('static', filename='script/script.js') }}"></script>
+
     </body>
 </html>

@@ -69,7 +69,8 @@ def registrar_animal():
 
 @app.route("/adocao")
 def adocao():
-     return render_template("adocao.html")
+     animais = bd.listar_animais()
+     return render_template("adocao.html", animais)
 
 @app.route("/doacao")
 def doacao():
@@ -95,6 +96,24 @@ def adicionar_usuario():
      bd.add_usuario(novo_usuario)
 
      return render_template('index.html')
+
+@app.route("/adicionar_animal")
+def adcionar_animal():
+
+     novo_animal = {
+          "nome": request.form["nome"],
+          "idade": request.form["idade"],
+          "idade_unidade": request.form["idade_unidade"],
+          "raca_id": request.form["raca_id"],
+          "sexo_id": request.form["sexo_id"],
+          "cor_id": request.form["cor_id"],
+          "peso_valor": request.form["peso_valor"],
+          "peso_unidade": request.form["peso_unidade"],
+          "castrado": request.form.get("castrado", "0"),
+          "vacinacao_medicacao": request.form["vacinacao_medicacao"],
+          "status_adocao": request.form["status_adocao"],
+          "imagem": request.files.get("imagem")
+     }
 
 
 
