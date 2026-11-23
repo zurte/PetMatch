@@ -78,9 +78,6 @@ def criar_tabela_animais():
                    
     
 def add_usuario(usuario):
-    """usuario"""
-
-    print("ok")
 
     conexao = sqlite3.connect("DataBase.db")
     cursor = conexao.cursor()
@@ -92,6 +89,45 @@ def add_usuario(usuario):
     conexao.commit()
     conexao.close()
 
+def add_animal(animal):
+    conexao = sqlite3.connect("DataBase.db")
+    cursor = conexao.cursor()
+
+    dados = (
+    animal["nome"],
+    animal["idade"],
+    animal["idade_unidade"],
+    animal["raca_id"],
+    animal["sexo_id"],
+    animal["cor_id"],
+    animal["peso_valor"],
+    animal["peso_unidade"],
+    animal["castrado"],
+    animal["vacinacao_medicacao"],
+    animal["status_adocao"],
+    animal["imagem"]
+    )
+
+    cursor.execute("""
+        INSERT INTO animais (
+            nome,
+            idade,
+            idade_unidade,
+            raca_id,
+            sexo_id,
+            cor_id,
+            peso_valor,
+            peso_unidade,
+            castrado,
+            vacinacao_medicacao,
+            status_adocao,
+            image
+        )
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """, dados)
+
+    conexao.commit()
+    conexao.close()
 
 def checar_usuario(email,senha):
 
@@ -123,6 +159,40 @@ def checar_usuario(email,senha):
 
     return True
 
+def listar_animais():
+    conexao = sqlite3.connect("DataBase.db")
+    cursor = conexao.cursor()
+
+    cursor.execute(""" 
+
+                    SELECT  
+                    animais.nome,
+                    animais.image,
+                    animais.idade,
+                    animais.idade_unidade,
+                    racas.raca,
+                    sexos.descricao,
+                    cores.nome_cor
+
+                    FROM animais
+                    
+                    JOIN racas ON animais.raca_id = racas.id
+
+                    JOIN sexos ON animais.sexo_id = sexos.id
+
+                    JOIN cores ON animais.cor_id = cores.id;
+
+                    
+                    """)
+    animais = cursor.fetchall()
+
+    cursor.close()
+    conexao.close()
+
+    return animais
+
+
 criar_tabela_usuario()
 criar_tabela_animais()
+
 
