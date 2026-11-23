@@ -61,6 +61,12 @@ table {
     border-radius: 25px;
     padding: 20px
 }
+
+button[type="submit"]{
+    border-radius: 12px;
+    text-align: center;
+}
+
 /*login*/
 form {
     background-color: white;
@@ -77,13 +83,22 @@ button#redirecionar{
     display: block ;
     margin: 0 auto;
 }
+/*adocao*/
+
+
+
+
+
+
+
+
+
+
+
 /*Index*/
 .navbar ul{
     display: flex;
     flex-direction: row;
     gap: 705px;
 }
-navbar li[adocao]{
-    height: 250px;
-    width: 250px;
-}
+
