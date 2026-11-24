@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br"> 
+    <head> 
+        <meta charset="UTF-8">
+        <title>PetMatch-{{animal.nome}}-{{animal.id}}</title> 
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    </head> 
+    <body>
+        <div>
+            <nav>
+                <h1>PetMatch</h1>
+                <ul>
+                    <li><button><a href="/adocao">Adoção</a></button></li>
+                    <li><button><a href="/doacao">doação</a></button></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="conteiner-animal">
+            <h2>{{animal.nome}}: espécie: {{animal.especie}} raca: {{animal.raca}} </h2>
+            <img src="{{ url_for('static', filename=animal.imagem.replace('static/', '')) }}" alt="{{animal.nome}}">
+            <p>idade: {{animal.idade}} {{animal.idade_unidade}}</p>
+            <p>sexo: {{animal.sexo}}</p>
+            <p>cor: {{animal.cor}}</p>
+            <p>peso: {{animal.peso_valor}} {{animal.peso_unidade}}</p>
+            <p>castrado: {{animal.castrado}}</p>
+            <p>vacinacao e medicacao: {{animal.vacinacao_medicacao}}</p>
+        </div>
+    </body> 
+</html>

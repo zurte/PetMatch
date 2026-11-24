@@ -16,17 +16,22 @@
             </nav>
             <div>
                 {%if animais%}
-                <h2>Pets para adoção</h2>
-                    {% for animal in animais %}
-                    <div id="{{animal[0]}} " name="{{animal[0]}}" class="card-animal">
-                        <h2>{{animal[0]}}</h2>
-                        <img src="{{animal[1]}}" alt="imagem do animal">
-                        <p>idade: {{animal[2]}} {{animal[3]}}</p>
-                        <p>raca: {{animal[4]}}</p>
-                        <p>sexo: {{animal[5]}}</p>
-                        <p>cor: {{animal[6]}}</p><br><br>
-                    </div>
-                    {%endfor%}
+                    
+                        <h2>Pets para adoção</h2>
+                        {% for animal in animais %}
+                        <form action="{{url_for('detalhes_animal', id=animal[0])}}" method="GET">
+                            <div id="{{animal[0]}} " name="{{animal[0]}}" class="card-animal">
+                                <button type="submit" class="card-animal-button">
+                                    <h2>{{animal[1]}}</h2>
+                                    <img src="{{animal[2]}}" alt="imagem do animal">
+                                    <p>idade: {{animal[3]}} {{animal[4]}}</p>
+                                    <p>raca: {{animal[5]}}</p>
+                                    <p>sexo: {{animal[6]}}</p>
+                                    <p>cor: {{animal[7]}}</p><br><br>
+                                </button>
+                            </div>
+                        </form>
+                        {%endfor%}
                 {%endif%}
             </div>
         </div>
