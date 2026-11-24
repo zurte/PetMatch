@@ -165,7 +165,8 @@ def listar_animais():
 
     cursor.execute(""" 
 
-                    SELECT  
+                    SELECT
+                    animais.id,  
                     animais.nome,
                     animais.image,
                     animais.idade,
@@ -191,6 +192,63 @@ def listar_animais():
 
     return animais
 
+def buscar_animal(animal_id):
+    conexao = sqlite3.connect("DataBase.db")
+    cursor = conexao.cursor()
+    
+    cursor.execute(""" 
+
+                    SELECT
+                    animais.id,  
+                    animais.nome,
+                    animais.image,
+                    animais.idade,
+                    animais.idade_unidade,
+                    racas.raca,
+                    especies.nome_especie,
+                    sexos.descricao,
+                    cores.nome_cor,
+                    animais.peso_valor,
+                    animais.peso_unidade,
+                    animais.castrado,
+                    animais.vacinacao_medicacao
+
+                    FROM animais
+
+                    JOIN racas ON animais.raca_id = racas.id
+
+                    JOIN sexos ON animais.sexo_id = sexos.id
+
+                    JOIN cores ON animais.cor_id = cores.id
+
+                    JOIN especies ON racas.especie_id = especies.id
+
+                    WHERE animais.id = ?;
+                    """, (animal_id,))
+    
+    id, nome, imagem, idade, idade_unidade, raca, especie, sexo, cor, peso_valor, peso_unidade, castrado, vacinacao_medicacao = cursor.fetchone()
+
+
+    animal = {
+        "id": id,
+        "nome": nome,
+        "imagem": imagem,
+        "idade": idade,
+        "idade_unidade": idade_unidade,
+        "raca": raca,
+        "especie": especie,
+        "sexo": sexo,
+        "cor": cor,
+        "peso_valor": peso_valor,
+        "peso_unidade": peso_unidade,
+        "castrado": castrado,
+        "vacinacao_medicacao": vacinacao_medicacao
+    }
+
+    cursor.close()
+    conexao.close()
+
+    return animal
 
 criar_tabela_usuario()
 criar_tabela_animais()
