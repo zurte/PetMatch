@@ -11,15 +11,6 @@ caminho_script = os.path.abspath("static/script/script.js")
 app = Flask(__name__)
 
 
-@app.route('/detalhes_animal/<int:animal_id>')
-def detalhes_animal(animal_id):
-     animal = bd.buscar_animal(animal_id)
-
-     if animal is None:
-          return "animal não encontrado", 404
-
-     print(animal['imagem'])
-     return render_template(f'detalhes_animal.html', animal=animal)
 
 @app.route("/")
 def inicio():
@@ -45,11 +36,6 @@ def registrar_usuario():
 @app.route("/registrar_animal")
 def registrar_animal():
      return render_template("formulario_adocao.html")
-
-@app.route("/adocao")
-def adocao():
-     animais = bd.listar_animais()
-     return render_template("adocao.html", animais = animais)
 
 @app.route("/doacao")
 def doacao():
@@ -101,6 +87,16 @@ def adcionar_animal():
      bd.add_animal(novo_animal)
 
      return render_template('formulario_adocao.html', mensagem_sucesso="Animal adicionado com sucesso!")
+
+@app.route('/detalhes_animal/<int:animal_id>')
+def detalhes_animal(animal_id):
+     animal = bd.buscar_animal(animal_id)
+
+     if animal is None:
+          return "animal não encontrado", 404
+
+     print(animal['imagem'])
+     return render_template(f'detalhes_animal.html', animal=animal)
 
 
 
