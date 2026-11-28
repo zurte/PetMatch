@@ -1,4 +1,4 @@
-from flask import Flask, render_template,send_file,request
+from flask import Flask, render_template,send_file,request,redirect,url_for,session
 import bd
 import os
 
@@ -10,7 +10,7 @@ caminho_script = os.path.abspath("static/script/script.js")
 
 app = Flask(__name__)
 
-
+app.secret_key = "petmatch_chave_secreta_2026"
 
 @app.route("/")
 def inicio():
@@ -18,16 +18,45 @@ def inicio():
 
 @app.route('/index', methods=['GET', 'POST'])
 def index():
-    if request.method == 'POST':
+     if request.method == 'POST':
 
-        email = request.form['email']
-        senha = request.form['senha']
+          email = request.form['email']
+          senha = request.form['senha']
 
-        if bd.checar_usuario(email,senha):
-          animais = bd.listar_animais()
-          return render_template('index.html', animais=animais)
-        else:
-          return render_template('formulario_login.html',senha_incorreta="senha incorreta")
+          tutor_id = bd.autenticar(email,senha)
+
+          if tutor_id is not None:
+               session['tutor_id'] = tutor_id
+
+               return redirect(url_for('index'))
+          else:
+                return render_template('formulario_login.html',senha_incorreta="senha incorreta")
+
+          
+     especie_selecionada = request.args.get('especie','todas')
+
+     
+     animais = bd.listar_animais()
+     especies = bd.listar_especie()
+
+     animais_por_especie = {}
+
+     for especie_id, nome_especie in especies:
+          animais_por_especie[nome_especie] = []
+
+
+     for animal in animais:
+          nome_especie = animal[8]
+
+          animais_por_especie[nome_especie].append(animal)
+
+     print(animais_por_especie)
+
+     return render_template('index.html', 
+                              animais_por_especie=animais_por_especie, 
+                              especies=especies,
+                              especie_selecionada=especie_selecionada)
+          
 
 @app.route("/registrar", methods=["GET","POST"])
 def registrar_usuario():
@@ -95,8 +124,11 @@ def detalhes_animal(animal_id):
      if animal is None:
           return "animal não encontrado", 404
 
-     print(animal['imagem'])
-     return render_template(f'detalhes_animal.html', animal=animal)
+     tutor_id = session.get('tutor_id')
+
+     tutor = bd.buscar_tutor(tutor_id)
+     
+     return render_template(f'detalhes_animal.html', animal=animal,tutor=tutor)
 
 
 

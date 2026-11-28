@@ -2,21 +2,23 @@
 <html lang="pt-br"> 
     <head> 
         <meta charset="UTF-8">
-        <title>PetMatch-{{animal.nome}}-{{animal.id}}</title> 
+        <title>PetMatch-{{animal.nome}}</title> 
         <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     </head> 
     <body>
         <div>
             <nav>
-                <h1>PetMatch</h1>
+                <h1>Será que fomos feitos um para o outro?</h1>
                 <ul>
                     <li><button><a href="/doacao">doação</a></button></li>
                 </ul>
             </nav>
         </div>
         <div class="conteiner-animal">
-            <h2>{{animal.nome}}: espécie: {{animal.especie}} raca: {{animal.raca}} </h2>
             <img src="{{ url_for('static', filename=animal.imagem.replace('static/', '')) }}" alt="{{animal.nome}}">
+            <p>Nome: {{animal.nome}} </p>
+            <p>espécie: {{animal.especie}} </p>
+            <p>raca: {{animal.raca}} </p>
             <p>idade: {{animal.idade}} {{animal.idade_unidade}}</p>
             <p>sexo: {{animal.sexo}}</p>
             <p>cor: {{animal.cor}}</p>
@@ -24,5 +26,34 @@
             <p>castrado: {{animal.castrado}}</p>
             <p>vacinacao e medicacao: {{animal.vacinacao_medicacao}}</p>
         </div>
+        <div>
+            <h2>Oi! Que bom que você se interessou por mim! Estou esperando uma oportunidade de encontrar uma família que respeite
+                minhas necessidades e me ofereça muito carinho.</h2>
+        </div>
+        <section>
+            <form action="#" method="POST">
+                <input type="hidden" name="animal_id" value="{{ animal.id }}">
+
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" value="{{tutor.nome}}"required><br>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="{{tutor.email}}" required><br>
+
+                <label for="telefone">Telefone:</label>
+                <input type="text" id="telefone" name="telefone" value="{{tutor.telefone}}" required><br>
+
+                <label for="cpf">CPF:</label>
+                <input type="text" id="cpf" name="cpf" value="{{tutor.cpf}}" required><br>
+
+                <label for="cep">Cep:</label>
+                <input type="text" id="cep" name="cep" value="{{tutor.cep}}" required><br>  
+                <button type="submit">Enviar</button>
+                
+            </form>
+        </section>
+        
+
+        
     </body> 
 </html>

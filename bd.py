@@ -75,8 +75,7 @@ def criar_tabela_animais():
                     castrado BOOLEAN NOT NULL DEFAULT 0 CHECK (castrado IN (0,1))
                     );
                 """)
-                   
-    
+                     
 def add_usuario(usuario):
 
     conexao = sqlite3.connect("DataBase.db")
@@ -163,34 +162,44 @@ def listar_animais():
     conexao = sqlite3.connect("DataBase.db")
     cursor = conexao.cursor()
 
-    cursor.execute(""" 
-
-                    SELECT
-                    animais.id,  
-                    animais.nome,
-                    animais.image,
-                    animais.idade,
-                    animais.idade_unidade,
-                    racas.raca,
-                    sexos.descricao,
-                    cores.nome_cor
-
-                    FROM animais
-                    
-                    JOIN racas ON animais.raca_id = racas.id
-
-                    JOIN sexos ON animais.sexo_id = sexos.id
-
-                    JOIN cores ON animais.cor_id = cores.id;
-
-                    
-                    """)
+    cursor.execute("""
+            SELECT
+                animais.id,
+                animais.nome,
+                animais.image,
+                animais.idade,
+                animais.idade_unidade,
+                racas.raca,
+                sexos.descricao,
+                cores.nome_cor,
+                especies.nome_especie
+    
+            FROM animais
+    
+            JOIN racas ON animais.raca_id = racas.id
+            JOIN especies ON racas.especie_id = especies.id
+            JOIN sexos ON animais.sexo_id = sexos.id
+            JOIN cores ON animais.cor_id = cores.id
+        """)
+    
     animais = cursor.fetchall()
 
     cursor.close()
     conexao.close()
 
     return animais
+
+def listar_especie():
+    conexao = sqlite3.connect("DataBase.db")
+    cursor = conexao.cursor()
+
+    cursor.execute("SELECT id, nome_especie FROM especies")
+    especies = cursor.fetchall()
+
+    cursor.close()
+    conexao.close()
+
+    return especies
 
 def buscar_animal(animal_id):
     conexao = sqlite3.connect("DataBase.db")
@@ -250,7 +259,60 @@ def buscar_animal(animal_id):
 
     return animal
 
+def autenticar(email, senha):
+    conexao = sqlite3.connect('DataBase.db')
+    cursor = conexao.cursor()
+
+    cursor.execute("""
+                    SELECT id,senha
+                    FROM tutores
+                    WHERE email = ?
+                    """,(email,))
+    
+    usuario = cursor.fetchall()
+    cursor.close()
+    conexao.close()
+
+    if usuario is None:
+        return None
+
+    usuario_id, senha_hash = usuario[0]
+
+
+    if not senha_check(senha_hash,senha):
+        return None
+
+    return usuario_id
+
+def buscar_tutor(tutor_id):
+    conexao = sqlite3.connect('DataBase.db')
+    cursor = conexao.cursor()
+
+    cursor.execute("""
+                    SELECT id, nome, cpf, email, cep, numero
+                    FROM tutores
+                    WHERE id = ?
+                    """,(tutor_id,))
+    tutor = cursor.fetchall()
+
+    cursor.close()
+    conexao.close()
+
+    if tutor is None:
+        return None
+    
+    return {
+    "id": tutor[0][0],
+    "nome": tutor[0][1],
+    "cpf": tutor[0][2],
+    "email": tutor[0][3],
+    "cep": tutor[0][4],
+    "telefone": tutor[0][5]
+    }
+
+
 criar_tabela_usuario()
 criar_tabela_animais()
+
 
 
